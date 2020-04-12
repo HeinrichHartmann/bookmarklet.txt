@@ -13,6 +13,7 @@ async def handle_bookmark(request):
     # print(line)
     with open(Path("~/bookmarks.txt").expanduser(), "a") as fh:
         fh.write(line)
+    return web.Response(status=200)
 
 app.router.add_post("/bookmark", handle_bookmark)
 
