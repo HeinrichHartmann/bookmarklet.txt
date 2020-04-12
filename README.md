@@ -22,15 +22,20 @@ make osx-launch-agent
 
 ## Bookmarklet
 
+GitHub does not allow to share Bookmarklet links directly ([source](https://github.com/github/markup/issues/79)).
+So you have to do this the manual way. 
+
+Either, create a new bookmark and paste the following text into the "Location" field:
+```
+javascript:(function()%7Bvar%20req%20%3D%20new%20XMLHttpRequest()%3B%20req.open(%22POST%22%2C%20%22http%3A%2F%2Flocalhost%3A8080%2Fbookmark%22%2C%20true)%3B%20req.send(JSON.stringify(%7B%20%22title%22%20%3A%20document.title%2C%20%22url%22%20%3A%20location.href%20%7D))%7D)()
+```
+
+OR, paste the following code into a bookmarklet generator (e.g. https://mrcoles.com/bookmarklet/)
 ```js
 var req = new XMLHttpRequest();
 req.open("POST", "http://localhost:8080/bookmark", true);
 req.send(JSON.stringify({ "title" : document.title, "url" : location.href }))
 ```
-
-Link: <a href="javascript:(function()%7Bvar%20req%20%3D%20new%20XMLHttpRequest()%3B%20req.open(%22POST%22%2C%20%22http%3A%2F%2Flocalhost%3A8080%2Fbookmark%22%2C%20true)%3B%20req.send(JSON.stringify(%7B%20%22title%22%20%3A%20document.title%2C%20%22url%22%20%3A%20location.href%20%7D))%7D)()">Bookmark</a>
-
-Drag this link into your bookmarks bar to install the bookmarklet.
 
 Catch: We won't be able to read and data that is sent back to us from the server, like a HTTP
 Response code, because of CORS. So it's not possible for us to give feedback about success/failure
