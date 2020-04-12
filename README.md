@@ -37,6 +37,9 @@ req.open("POST", "http://localhost:8080/bookmark", true);
 req.send(JSON.stringify({ "title" : document.title, "url" : location.href }))
 ```
 
-Catch: We won't be able to read and data that is sent back to us from the server, like a HTTP
+Catch-1: We won't be able to read and data that is sent back to us from the server, like a HTTP
 Response code, because of CORS. So it's not possible for us to give feedback about success/failure
 of the bookmark operation.
+
+Catch-2: It looks like Firefox is blocking requests from bookmarklets, if some CSP headers are set.
+https://bugzilla.mozilla.org/show_bug.cgi?id=866522
